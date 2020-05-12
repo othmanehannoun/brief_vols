@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -31,34 +31,98 @@
 
 
 <div class="header">
-  <form action="">
+  <form action="index.php" method="post">
   <h1>Find your <span>Next tour!</span> </h1>
     <p>Where would you like to go?</p>
     <div class="font-box">
 
-    <select class="search-field skills" id="inputGroupSelect01">
+    <!-- <input type="text" name="depart" palceholder="depart">
+
+    <input type="text" name="destination" palceholder="destination"> -->
+
+    <select name="depart" class="search-field skills" id="inputGroupSelect01">
         <option selected>From...</option>
-        <option value="Casablanca">Casablanca</option>
-        <option value="Fès">Fès</option>
-        <option value="Salé">Salé</option>
+        <option value="Casablanca">casa blanca</option>
+        <option value="Fes">Fès</option>
+        <option value="safi">Safi</option>
         <option value="Rabat">Rabat</option>
         <option value="Salé">Salé</option>
     </select>
 
-    <select class="search-field skills" id="inputGroupSelect01">
+    <select name="destination" class="search-field skills" id="inputGroupSelect01">
         <option selected>To...</option>
-        <option value="Casablanca">Casablanca</option>
-        <option value="Fès">Fès</option>
-        <option value="Salé">Salé</option>
+        <option value="Casa blanca">Casa blanca</option>
+        <option value="Fes">Fès</option>
+        <option value="safi">safi</option>
         <option value="Rabat">Rabat</option>
         <option value="Salé">Salé</option>
     </select>
 
-    <button class="search-btn" type="button">Search</button>
+    <button class="search-btn" type="submit" name="submit">Search</button>
 
     </div>
   </form>
 </div>
-  
+
+<center>
+<h2>Available flights</h2>
+<h5>Bootstrap heading Bootstrap heading</h5>
+</center>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      
+      <th scope="col">Depart</th>
+      <th scope="col">Destianation</th>
+      <th scope="col">date de depart</th>
+      <th scope="col">Time</th>
+      <th scope="col">Price</th>
+      <th scope="col">nombre de Place</th>
+      <th scope="col">Reservation</th>
+    </tr>
+  </thead>
+                
+    <?php 
+            $db = mysqli_connect("localhost","root","","ROM");
+            if (isset($_POST['submit'])){
+                $depart = $_POST['depart'];
+                $destination = $_POST['destination'];
+                $query = mysqli_query($db, "SELECT * FROM Vols WHERE départ = '$depart' AND destination = '$destination' "); 
+      
+                if (mysqli_num_rows($query) > 0 ) {
+                while ($row = mysqli_fetch_array($query)){
+                    $id = $row['idVol'];
+                    $depart = $row['départ'];
+                    $destination = $row['destination'];
+                    $date = $row['Date_depart'];
+                    $time = $row['Time_depart'];
+                    $prix = $row['Prix'];
+                    $nbrPlace = $row['nomberPlace'];
+    
+     ?>
+
+                <tbody>
+                    <tr class="table-active">
+                      
+                      <td><?php echo $depart; ?></td>
+                      <td><?php echo $destination;?></td>
+                      <td><?php echo $date; ?></td>
+                      <td><?php echo $time; ?></td>
+                      <td><?php echo $prix;?>DH</td>
+                      <td><?php echo $nbrPlace; ?></td>
+                      <td><button type="button" class="btn btn-warning"">
+                        <a href="reservation.php?id=<?php echo $id; ?>">Reserver</a></button></td>
+                      
+                    </tr>
+                  
+                  </tbody>
+                
+   <?php } }
+     else { echo "<script> alert('Aucun resulta')</script>"; }
+   }
+   ?> 
+   
+     </table>
+
 </body>
 </html>
