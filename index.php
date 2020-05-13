@@ -65,7 +65,65 @@
   <center>
   <h2>Available flights</h2>
   <h5>Bootstrap heading Bootstrap heading</h5>
-  </center>
+  </center> 
+  <?php 
+      $db = mysqli_connect("localhost","root","","ram");
+      if (isset($_POST['submit'])){
+          $depart = $_POST['depart'];
+          $destination = $_POST['destination'];
+          $query = mysqli_query($db, "SELECT * FROM vols WHERE départ = '$depart' AND destination = '$destination' "); 
+          
+          if (mysqli_num_rows($query) > 0 ) {
+            $texta = ' <div class="text-center"> ';
+            echo $texta;
+            while ($row = mysqli_fetch_array($query)){
+              // $id = $row['idVol'];
+              // $depart = $row['départ'];
+              // $destination = $row['destination'];
+              // $date = $row['Date_depart'];
+              // $time = $row['Time_depart'];
+              // $prix = $row['Prix'];
+              // $nbrPlace = $row['nomberPlace'];
+              $text = ' <div class="col-lg-3 col-md-6 mb-4"> ';
+              $text .= ' <div class="card h-100"> ';
+              $text .= ' <img class="card-img-top" src="http://placehold.it/500x325"> ';
+              $text .= ' <div class="card-body"> ';
+              $text .= ' <h4 class="card-title"> ' . $row['départ'] .'</h4>';
+              $text .= ' <h4 class="card-title"> '. $row['destination'] .'</h4>';
+              $text .= ' <h6 class="card-title"> '. $row['Date_depart'] .'</h6>';
+              $text .= ' <h6 class="card-title"> '. $row['nombrePlace'] .' place disponible </h6>';
+              $text .= ' </div>';
+              $text .= ' <div class="card-footer">';
+              $text .= ' <a href="#" class="btn btn-primary">Reserver!</a>';
+              $text .= ' </div>';
+              $text .= ' </div>';
+              $text .= ' </div>';
+              echo $text;
+
+              // echo "<div class=\"row text-center\">";
+
+              // echo "<div class=\"col-lg-3 col-md-6 mb-4\">";
+              // echo " <div class=\"card h-100\">";
+              // echo "<img class=\"card-img-top\" src=\"http://placehold.it/500x325\">";
+              // echo "<div class=\"card-body\">";
+              // echo "<h4 class=\"card-title\">" . $row['Depart'] ."</h4>";
+              // echo "<h4 class=\"card-title\">". $row['Destination'] ."</h4>";
+              // echo "</div>";
+              // echo "<div class=\"card-footer\">";
+              // echo "<a href=\"#\" class=\"btn btn-primary\">Find Out More!</a>";
+              // echo "</div>";
+              // echo "</div>";
+              // echo "</div>";
+            }
+            
+          }
+          else{
+            echo "nothing" . "</br>";
+          }
+      }      
+        
+      
+    ?>
   <div class="row text-center">
 
       <!-- <div class="col-lg-3 col-md-6 mb-4">
@@ -125,64 +183,7 @@
       </div> -->
 
     </div>
-    <?php 
-      $db = mysqli_connect("localhost","root","","ram");
-      if (isset($_POST['submit'])){
-          $depart = $_POST['depart'];
-          $destination = $_POST['destination'];
-          $query = mysqli_query($db, "SELECT * FROM vols WHERE Depart = '$depart' AND Destination = '$destination' "); 
-          $texta = ' <div class="row text-center"> ';
-          echo $texta;
-          if (mysqli_num_rows($query) > 0 ) {
-           
-            while ($row = mysqli_fetch_array($query)){
-              // $id = $row['idVol'];
-              // $depart = $row['départ'];
-              // $destination = $row['destination'];
-              // $date = $row['Date_depart'];
-              // $time = $row['Time_depart'];
-              // $prix = $row['Prix'];
-              // $nbrPlace = $row['nomberPlace'];
-              $text = ' <div class="col-lg-3 col-md-6 mb-4"> ';
-              $text .= ' <div class="card h-100"> ';
-              $text .= ' <img class="card-img-top" src="http://placehold.it/500x325"> ';
-              $text .= ' <div class="card-body"> ';
-              $text .= ' <h4 class="card-title"> ' . $row['Depart'] .'</h4>';
-              $text .= ' <h4 class="card-title"> '. $row['Destination'] .'</h4>';
-              $text .= ' <h6 class="card-title"> '. $row['Date'] .'</h6>';
-              $text .= ' <h6 class="card-title"> '. $row['NombrePlace'] .' place disponible </h6>';
-              $text .= ' </div>';
-              $text .= ' <div class="card-footer">';
-              $text .= ' <a href="#" class="btn btn-primary">Reserver!</a>';
-              $text .= ' </div>';
-              $text .= ' </div>';
-              $text .= ' </div>';
-              echo $text;
-
-              // echo "<div class=\"row text-center\">";
-
-              // echo "<div class=\"col-lg-3 col-md-6 mb-4\">";
-              // echo " <div class=\"card h-100\">";
-              // echo "<img class=\"card-img-top\" src=\"http://placehold.it/500x325\">";
-              // echo "<div class=\"card-body\">";
-              // echo "<h4 class=\"card-title\">" . $row['Depart'] ."</h4>";
-              // echo "<h4 class=\"card-title\">". $row['Destination'] ."</h4>";
-              // echo "</div>";
-              // echo "<div class=\"card-footer\">";
-              // echo "<a href=\"#\" class=\"btn btn-primary\">Find Out More!</a>";
-              // echo "</div>";
-              // echo "</div>";
-              // echo "</div>";
-            }
-            
-          }
-          else{
-            echo "nothing" . "</br>";
-          }
-      }      
-        
-      
-    ?>
+   
 <!-- 
   <table class="table">
     <thead class="thead-dark">
