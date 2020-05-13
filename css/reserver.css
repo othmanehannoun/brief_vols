@@ -36,8 +36,8 @@ img {
   justify-content: center;
   align-items: center;
   font-family: sans-serif;
-  margin-bottom: 66px;
 }
+
 h1{
   text-align: center;
   color: #fff;
@@ -58,6 +58,7 @@ p{
 .search-field{
   height: 50px;
   padding: 10px;
+  margin: 0 5px;
 }
 .skills{
   width: 300px;
@@ -71,6 +72,7 @@ p{
   background: #fde02f;
   border: none;
   color: black;
+  margin-left: 6px;
 }
 
 a {
@@ -82,6 +84,9 @@ a:hover{
   color: #000000;
 }
 
+.font{
+  margin-bottom: 15px;
+}
 .font-box{
   background: rgba(255, 255, 255, 0.5);
   padding: 30px 50px;
