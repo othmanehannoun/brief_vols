@@ -3,9 +3,9 @@
     $db = mysqli_connect("localhost","root","","db_gestionVols");
     $query1 = mysqli_query($db, "SELECT * FROM reservation WHERE idreservation = $id_reserv");
     if(mysqli_num_rows($query1) == 1){
-        $row = mysqli_fetch_array($query1);
-        $id_client = $row['idClient'];
-        $id_Vol = $row['idVol'];
+        $fetch = mysqli_fetch_array($query1);
+        $id_client = $fetch['idClient'];
+        $id_Vol = $fetch['idVol'];
 
         $query2 = mysqli_query($db, "SELECT * FROM client WHERE idClient = $id_client");
         if(mysqli_num_rows($query2) == 1){
@@ -16,9 +16,20 @@
             $email = $fetch['Email'];
             $tel = $fetch['tel'];
             $cin = $fetch['CIN'];
+
+            $query3 = mysqli_query($db, "SELECT * FROM vols WHERE idvol = $id_Vol");
+            if(mysqli_num_rows($query3) == 1){
+              $fetch = mysqli_fetch_array($query3);
+              $depart = $fetch['depart'];
+              $destination = $fetch['destination'];
+              $date_depart = $fetch['date_depart'];
+              $time = $fetch['time'];
+              $prix = $fetch['prix'];
+            }
         }
+
+        
     }
-    $query3 = mysqli_query($db, "SELECT * FROM vols WHERE idvol = $id_Vol");
     
 ?>
 
@@ -29,6 +40,8 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/confi_css.css">
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -51,8 +64,43 @@
     </div>
   </div>
 </nav>
-<p> <?php echo $nom ;?> </p>
-<p> <?php echo $prenom; ?> </p>
+
+<div class="row">
+  <div class="col-75">
+    <div class="container">
+      <form >
+      
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <p class="bl" ><?php echo $nom . " " . $prenom ?></p>
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <p class="bl" ><?php echo $email ?></p>
+            <label for="adr"><i class="fa fa-address-card-o"></i> C.I.N</label>
+            <p class="bl" ><?php echo $cin ?></p>
+            <label for="city"><i class="fa fa-institution"></i> Telephone</label>
+            <p class="bl" ><?php echo $tel ?></p>
+
+          </div>
+
+         
+          
+        </div>
+        <input type="submit" value="Continue to checkout" class="btn">
+      </form>
+    </div>
+  </div>
+  <div class="col-25">
+    <div class="container">
+      <h4>Ticket N°  <span class="price" style="color:red"> <?php echo $id_reserv ?> </span></h4>
+      <p class="black">Départ:  <span class="bl"><?php echo $depart ?></span></p>
+      <p class="black">Destination: <span class="bl"><?php echo $destination ?></span></p>
+      <p class="black">Date: <span class="bl"><?php echo $date_depart ?></span> à :<span><?php echo $time ?></span></p>
+      <p class="black">Prix :<span class="bl"><?php echo $prix ?> DH</span> </p>
+    </div>
+  </div>
+</div>
 
 
 </body>

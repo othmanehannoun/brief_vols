@@ -42,7 +42,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`idClient`, `Nom`, `Prenom`, `Email`, `tel`, `CIN`) VALUES
-(1, 'lmajad', 'ndor', 'mjid@gmail.com', 'SH6667', '0697546508');
+(1, 'test', 'test', 'test@gmail.com', 'SH6667', '0697546508');
 
 -- --------------------------------------------------------
 
@@ -87,7 +87,8 @@ CREATE TABLE `vols` (
 INSERT INTO `vols` (`idVol`, `depart`, `destination`, `date_depart`, `time`, `prix`, `place_disponible`) VALUES
 (1, 'Safi', 'casablanca', '2020-05-28', '12:00:00', 100, 10),
 (2, 'dakhla', 'fes', '2020-05-31', '00:00:00', 300, 10),
-(3, 'dakhla', 'fes', '2020-06-18', '17:30:00', 300, 10);
+(3, 'dakhla', 'fes', '2020-06-18', '17:30:00', 300, 10),
+(4, 'fes' ,'dakhla' , '2020-06-18', '17:30:00', 300, 10);
 
 --
 -- Index pour les tables déchargées
