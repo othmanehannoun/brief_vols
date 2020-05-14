@@ -36,25 +36,21 @@
     <p>Where would you like to go?</p>
     <div class="font-box">
 
-    <!-- <input type="text" name="depart" palceholder="depart">
-
-    <input type="text" name="destination" palceholder="destination"> -->
-
     <select name="depart" class="search-field skills" id="inputGroupSelect01">
         <option selected>From...</option>
-        <option value="Casablanca">casa blanca</option>
-        <option value="Fes">Fès</option>
+        <option value="casablanca">casa blanca</option>
+        <option value="fes">Fès</option>
         <option value="safi">Safi</option>
-        <option value="Rabat">Rabat</option>
+        <option value="dakhla">dakhla</option>
         <option value="Salé">Salé</option>
     </select>
 
     <select name="destination" class="search-field skills" id="inputGroupSelect01">
         <option selected>To...</option>
-        <option value="Casa blanca">Casa blanca</option>
-        <option value="Fes">Fès</option>
+        <option value="casablanca">Casa blanca</option>
+        <option value="fes">Fès</option>
         <option value="safi">safi</option>
-        <option value="Rabat">Rabat</option>
+        <option value="dakhla">dakhla</option>
         <option value="Salé">Salé</option>
     </select>
 
@@ -83,21 +79,21 @@
   </thead>
                 
     <?php 
-            $db = mysqli_connect("localhost","root","","ROM");
+            $db = mysqli_connect("localhost","root","","db_gestionVols");
             if (isset($_POST['submit'])){
                 $depart = $_POST['depart'];
                 $destination = $_POST['destination'];
-                $query = mysqli_query($db, "SELECT * FROM Vols WHERE départ = '$depart' AND destination = '$destination' AND nomberPlace > 0 "); 
+                $query = mysqli_query($db, "SELECT * FROM Vols WHERE depart = '$depart' AND destination = '$destination' AND place_disponible > 0 "); 
       
                 if (mysqli_num_rows($query) > 0 ) {
                 while ($row = mysqli_fetch_array($query)){
                     $id = $row['idVol'];
-                    $depart = $row['départ'];
+                    $depart = $row['depart'];
                     $destination = $row['destination'];
-                    $date = $row['Date_depart'];
-                    $time = $row['Time_depart'];
-                    $prix = $row['Prix'];
-                    $nbrPlace = $row['nomberPlace'];
+                    $date = $row['date_depart'];
+                    $time = $row['time'];
+                    $prix = $row['prix'];
+                    $nbrPlace = $row['place_disponible'];
     
      ?>
                 <tbody>

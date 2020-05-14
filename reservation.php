@@ -1,7 +1,7 @@
 
 <?php 
 
-$db = mysqli_connect("localhost", "root", "", "ROM");
+$db = mysqli_connect("localhost", "root", "", "db_gestionVols");
 
   $idVol = $_GET['id'];
 //   $idClient = $_GET['idClient'];
@@ -11,7 +11,6 @@ if ($row = mysqli_fetch_array($query1)) {
 }
 
 if (isset($_POST['reserver'])){
-  
   $nom = $_POST['nom'];
   $prenom = $_POST['prenom'];
   $email = $_POST['email'];
@@ -25,10 +24,9 @@ if (isset($_POST['reserver'])){
     $query2 = mysqli_query($db, "INSERT INTO reservation values('', '$last_id', '$idVol', now()) ");
   }
   
-   $query3 = mysqli_query($db, " UPDATE vols SET nomberPlace = nomberPlace - 1 where idVol = '$idVol'  " );
+   $query3 = mysqli_query($db, " UPDATE vols SET place_disponible -= 1 where idVol = '$idVol'  " );
 
 }
- 
 
 ?>
 
@@ -80,11 +78,11 @@ if (isset($_POST['reserver'])){
 
     <div class="font">
       <input type="text" class="search-field skills" name="phone" placeholder="Phone nember">
-      <!-- <input type="text" class="search-field skills" name="destination" placeholder="destination"> -->
     </div>
 
     <div class="font">
-    <button class="search-btn" type="submit" name="reserver">Reserver</button>
+    <button class="search-btn" type="submit" name="reserver">Confirmer</button>
+   
     </div>
     </div>
   </form>
