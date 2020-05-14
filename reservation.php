@@ -19,13 +19,17 @@ if (isset($_POST['reserver'])){
 
   $query1 = mysqli_query($db, "INSERT INTO client values('', '$nom', '$prenom', '$email', '$cin', '$phone')");
 
-   if($query1){
+  if($query1){
     $last_id = mysqli_insert_id($db);
     $query2 = mysqli_query($db, "INSERT INTO reservation values('', '$last_id', '$idVol', now()) ");
   }
-  
+  if($query2){
+    $reserv_id = mysqli_insert_id($db);
+  }
   $query3 = mysqli_query($db, " UPDATE vols SET place_disponible = place_disponible - 1 where idVol = '$idVol'  " );
 
+ 
+  header("Location: confirmation.php?id=$reserv_id");
 }
 
 ?>
@@ -81,7 +85,7 @@ if (isset($_POST['reserver'])){
     </div>
 
     <div class="font">
-    <button class="search-btn" type="submit" name="reserver" href="confirmation.php?id=<?php echo $id; ?>">Confirmer</button>
+    <button class="search-btn" type="submit" name="reserver" >  Confirmer</button>
    
     </div>
     </div>
