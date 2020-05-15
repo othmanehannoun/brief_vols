@@ -73,7 +73,7 @@
       <th scope="col">date de depart</th>
       <th scope="col">Time</th>
       <th scope="col">Price</th>
-      <th scope="col">nombre de Place</th>
+      <th scope="col">nombre de Place</th> nnnnnn
       <th scope="col">Reservation</th>
     </tr>
                 
