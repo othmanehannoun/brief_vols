@@ -64,10 +64,10 @@
 <h2>Available flights</h2>
 <h5>Bootstrap heading Bootstrap heading</h5>
 </center>
-<table class="table">
-  <thead class="thead-dark">
+<table class="table table-bordered">
+
     <tr>
-      
+
       <th scope="col">Depart</th>
       <th scope="col">Destianation</th>
       <th scope="col">date de depart</th>
@@ -76,7 +76,6 @@
       <th scope="col">nombre de Place</th>
       <th scope="col">Reservation</th>
     </tr>
-  </thead>
                 
     <?php 
             $db = mysqli_connect("localhost","root","","db_gestionVols");
@@ -97,7 +96,7 @@
     
      ?>
                 <tbody>
-                    <tr class="table-active">
+                    <tr>
                       
                       <td><?php echo $depart; ?></td>
                       <td><?php echo $destination;?></td>
