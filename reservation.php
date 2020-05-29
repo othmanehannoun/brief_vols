@@ -17,16 +17,18 @@ if (isset($_POST['reserver'])){
   $cin = $_POST['cin'];
   $phone = $_POST['phone'];
 
-  $query1 = mysqli_query($db, "INSERT INTO client values('', '$nom', '$prenom', '$email', '$cin', '$phone')");
+  $query2 = mysqli_query($db, "INSERT INTO client values('', '$nom', '$prenom', '$email', '$cin', '$phone')");
 
-  if($query1){
+  if($query2 == true){
     $last_id = mysqli_insert_id($db);
-    $query2 = mysqli_query($db, "INSERT INTO reservation values('', '$last_id', '$idVol', now()) ");
+    $query3 = mysqli_query($db, "INSERT INTO reservation values('', '$last_id', '$idVol', now()) ");
   }
-  if($query2){
+  
+  if($query3 == true){
     $reserv_id = mysqli_insert_id($db);
   }
-  $query3 = mysqli_query($db, " UPDATE vols SET place_disponible = place_disponible - 1 where idVol = '$idVol'  " );
+
+  $query4 = mysqli_query($db, " UPDATE vols SET place_disponible = place_disponible - 1 where idVol = '$idVol'  " );
 
  
   header("Location: confirmation.php?id=$reserv_id");
@@ -41,7 +43,7 @@ if (isset($_POST['reserver'])){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/reservation.css">
+  <link rel="stylesheet" href="css/reserver.css">
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -56,7 +58,7 @@ if (isset($_POST['reserver'])){
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="#">About</a>
       <a class="nav-item nav-link" href="#">Pricing</a>
       <a class="nav-item nav-link" href="#">Contat us</a>
@@ -84,7 +86,7 @@ if (isset($_POST['reserver'])){
       <td><?php echo $row['depart'];?></td>
       <td><?php echo $row['destination'];?></td>
       <td><?php echo $row['date_depart'];?></td>
-      <td><?php echo $row['prix'];?></td>
+      <td><?php echo $row['prix'];?>DH</td>
     </tr>
   </tbody>
 </table>

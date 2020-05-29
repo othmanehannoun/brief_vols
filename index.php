@@ -21,7 +21,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="#">About</a>
       <a class="nav-item nav-link" href="#">Pricing</a>
       <a class="nav-item nav-link" href="#">Contat us</a>
@@ -62,9 +62,9 @@
 
 <center>
 <h2>Available flights</h2>
-<h5>Bootstrap heading Bootstrap heading</h5>
+<h5>Let yourself be guided by our thematic offers.</h5>
 </center>
-<table class="table table-bordered">
+<table class="table table-bordered" id="#table">
 
     <tr>
 
